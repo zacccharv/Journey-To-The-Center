@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class DrillInteraction : MonoBehaviour
 {
-    public DrillData drillData;
     [SerializeField] private Color hoverColor, clickColor;
     private Color _defaultColor;
     private Renderer _renderer;
@@ -25,7 +24,7 @@ public class DrillInteraction : MonoBehaviour
 
     void OnMouseDown()
     {
-        drillData.DrillDown(drillData.drillPower);
+        DrillData.instance.DrillDown(1.0f);
         _renderer.material.color = clickColor;
     }
 
