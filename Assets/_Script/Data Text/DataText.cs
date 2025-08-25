@@ -37,7 +37,7 @@ public class DataText : MonoBehaviour
 
     public void UpdateShopText()
     {
-        if (ShopManager.instance.shopItems.Count == 0)
+        if (ShopManager.instance.DrillUpgrades.Count == 0)
         {
             shopText.text = "## SHOP ITEMS\n" +
                             "No items available";
@@ -45,11 +45,11 @@ public class DataText : MonoBehaviour
         }
 
         shopText.text = "## SHOP ITEMS\n" +
-                        "Current Item: " + ShopManager.instance.shopItems[0].itemName + "\n" +
-                        "Stone Cost = " + ShopManager.instance.shopItems[0].stoneCost + "\n" +
-                        "Coal Cost = " + ShopManager.instance.shopItems[0].coalCost + "\n" +
-                        "Iron Cost = " + ShopManager.instance.shopItems[0].ironCost + "\n" +
-                        "Copper Cost = " + ShopManager.instance.shopItems[0].copperCost + "\n";
+                        "Current Item: " + ShopManager.instance.DrillUpgrades[0].itemName + "\n" +
+                        "Stone Cost = " + ShopManager.instance.DrillUpgrades[0].stoneCost + "\n" +
+                        "Coal Cost = " + ShopManager.instance.DrillUpgrades[0].coalCost + "\n" +
+                        "Iron Cost = " + ShopManager.instance.DrillUpgrades[0].ironCost + "\n" +
+                        "Copper Cost = " + ShopManager.instance.DrillUpgrades[0].copperCost + "\n";
     }
 
     public static void UpdateResources()

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
@@ -25,30 +22,33 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    public void AddIronOre(int amount)
-    {
-        ironOre += amount * DrillData.instance.drillLevel / 4;
-        Debug.Log("Iron Ore: " + ironOre);
-    }
-
     public void AddCopperOre(int amount)
     {
-        copperOre += amount * DrillData.instance.drillLevel / 3;
+        copperOre += amount;
         Debug.Log("Copper Ore: " + copperOre);
+    }
+
+    public void AddIronOre(int amount)
+    {
+        ironOre += amount;
+        Debug.Log("Iron Ore: " + ironOre);
     }
 
     public void AddCoal(int amount)
     {
-        coal += amount * DrillData.instance.drillLevel / 2;
+        coal += amount;
         Debug.Log("Coal: " + coal);
     }
 
     public void AddStone(int amount)
     {
-        stone += amount * DrillData.instance.drillLevel;
+        stone += amount;
         Debug.Log("Stone: " + stone);
     }
 
+    /// <summary>
+    /// Main mining function that determines the type and amount of resources to mine.
+    /// </summary>
     public void MineForResources()
     {
 
@@ -60,15 +60,45 @@ public class ResourceManager : MonoBehaviour
             case 0:
                 break;
             case 1:
-                AddStone(amount);
+                AddStone(amount * DrillData.instance.drillLevel);
                 break;
             case 2:
-                AddCoal(amount);
+                AddCoal(amount * DrillData.instance.drillLevel / 2);
                 break;
             case 3:
-                AddIronOre(amount);
+                AddIronOre(amount * DrillData.instance.drillLevel / 3);
                 break;
             case 4:
+                AddCopperOre(amount * DrillData.instance.drillLevel / 4);
+                break;
+        }
+
+        DataText.UpdateResources();
+    }
+
+    /// <summary>
+    /// Mines for resources based on the specified resource type and amount.
+    /// 1. Stone
+    /// 2. Coal
+    /// 3. Iron Ore
+    /// 4. Copper Ore
+    /// </summary>
+    /// <param name="resourceType">The type of resource to mine.</param>
+    /// <param name="amount">The amount of resource to mine.</param>
+    public void MineForResources(ResourceType resourceType, int amount)
+    {
+        switch (resourceType)
+        {
+            case ResourceType.Stone:
+                AddStone(amount);
+                break;
+            case ResourceType.Coal:
+                AddCoal(amount);
+                break;
+            case ResourceType.Iron:
+                AddIronOre(amount);
+                break;
+            case ResourceType.Copper:
                 AddCopperOre(amount);
                 break;
         }

@@ -6,7 +6,8 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     public static ShopManager instance;
-    public List<ShopItem> shopItems = new();
+    public List<ShopItem> DrillUpgrades = new();
+    public List<ShopItem> Machines = new();
 
     private void Awake()
     {
@@ -46,7 +47,7 @@ public class ShopManager : MonoBehaviour
 
     public bool HasItem(ShopItem drillUpgradeItem)
     {
-        return shopItems.Contains(drillUpgradeItem);
+        return DrillUpgrades.Contains(drillUpgradeItem);
     }
 
     public void TryPurchase(ShopItem item)
@@ -59,11 +60,20 @@ public class ShopManager : MonoBehaviour
             ResourceManager.instance.ironOre -= item.ironCost;
             ResourceManager.instance.copperOre -= item.copperCost;
 
-            shopItems.Remove(item);
+            DrillUpgrades.Remove(item);
 
             // Add the item to the player's inventory or apply its effects
             Debug.Log("Purchased: " + item.itemName);
-            DrillData.instance.UpgradeDrill();
+
+            if (item.itemType == ItemType.DrillUpgrade)
+            {
+                DrillData.instance.UpgradeDrill();
+            }
+            else if (item.itemType == ItemType.Machine)
+            {
+                DrillData.instance.PurchaseMachine(item.machineType);
+            }
+
             DataText.UpdateShop();
             DataText.UpdateResources();
         }

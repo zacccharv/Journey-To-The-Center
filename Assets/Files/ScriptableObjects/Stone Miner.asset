@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7379684ee3cc87248ad051aa78964d70, type: 3}
-  m_Name: Iron Upgrade
+  m_Name: Stone Miner
   m_EditorClassIdentifier: 
-  itemName: Iron Upgrade
-  description: 
-  itemType: 0
-  machineType: 0
+  itemName: Stone Miner
+  description: Automatically mines stone every 1 seconds.
+  itemType: 1
+  machineType: 1
   stoneCost: 20
-  coalCost: 10
+  coalCost: 0
   ironCost: 0
   copperCost: 0

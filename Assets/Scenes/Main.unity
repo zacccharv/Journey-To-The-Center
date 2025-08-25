@@ -1223,10 +1223,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913757b6c19b0b347b8349ee733bc80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopItems:
+  DrillUpgrades:
   - {fileID: 11400000, guid: 8232ddbfe18d2314a8f19cc3ee8af728, type: 2}
   - {fileID: 11400000, guid: ed6faae888f67394e8f6dbdf42066ca6, type: 2}
   - {fileID: 11400000, guid: 6b5ed16073efdfe41b525f16062bda80, type: 2}
+  Machines: []
 --- !u!4 &2085076171
 Transform:
   m_ObjectHideFlags: 0
@@ -1247,9 +1248,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 1808253747}
   - {fileID: 904810244}
   - {fileID: 1378955866}
+  - {fileID: 1808253747}
   - {fileID: 1164991111}
   - {fileID: 2085076171}
   - {fileID: 490320624}

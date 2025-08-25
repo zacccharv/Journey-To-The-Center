@@ -14,13 +14,13 @@ public class DrillUpgradeButton : MonoBehaviour
 
     void Update()
     {
-        if (ShopManager.instance.shopItems.Count == 0)
+        if (ShopManager.instance.DrillUpgrades.Count == 0)
         {
             _upgradeButton.interactable = false;
             return;
         }
 
-        drillUpgradeItem = ShopManager.instance.shopItems[0];
+        drillUpgradeItem = ShopManager.instance.DrillUpgrades[0];
 
         if (ShopManager.instance.CanAfford(drillUpgradeItem))
         {

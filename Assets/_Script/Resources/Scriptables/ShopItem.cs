@@ -4,6 +4,9 @@ using UnityEngine;
 public class ShopItem : ScriptableObject
 {
     public string itemName;
+    [TextArea] public string description;
+    public ItemType itemType;
+    public MachineType machineType;
     public int stoneCost;
     public int coalCost;
     public int ironCost;
