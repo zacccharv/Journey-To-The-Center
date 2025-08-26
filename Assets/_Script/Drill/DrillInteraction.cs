@@ -1,35 +1,35 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Renderer))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class DrillInteraction : MonoBehaviour
 {
     [SerializeField] private Color hoverColor, clickColor;
     private Color _defaultColor;
-    private Renderer _renderer;
+    private SpriteRenderer _renderer;
     void Awake()
     {
-        _renderer = GetComponent<Renderer>();
-        _defaultColor = _renderer.material.color;
+        _renderer = GetComponent<SpriteRenderer>();
+        _defaultColor = _renderer.color;
     }
 
     void OnMouseEnter()
     {
-        _renderer.material.color = hoverColor;
+        _renderer.color = hoverColor;
     }
 
     void OnMouseExit()
     {
-        _renderer.material.color = _defaultColor;
+        _renderer.color = _defaultColor;
     }
 
     void OnMouseDown()
     {
         DrillData.instance.DrillDown(1.0f);
-        _renderer.material.color = clickColor;
+        _renderer.color = clickColor;
     }
 
     void OnMouseUp()
     {
-        _renderer.material.color = hoverColor;
+        _renderer.color = hoverColor;
     }
 }

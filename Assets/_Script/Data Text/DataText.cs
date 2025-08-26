@@ -1,23 +1,32 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class DataText : MonoBehaviour
 {
+    public static DataText instance;
     public static System.Action OnResourceUpdate;
     public static System.Action OnShopUpdate;
+    public static System.Action OnShopInit;
     public TextMeshProUGUI resourceText, shopText;
+    public ScrollRect shopScrollView;
+    public GameObject shopItemContainerPrefab;
     public DrillInteraction drillInteraction;
+    [HideInInspector] public Dictionary<ShopItem, GameObject> _shopItemContainers = new();
 
-    void OnEnable()
+    void Awake()
     {
-        OnResourceUpdate += UpdateResourceText;
-        OnShopUpdate += UpdateShopText;
-    }
-
-    void OnDisable()
-    {
-        OnResourceUpdate -= UpdateResourceText;
-        OnShopUpdate -= UpdateShopText;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void UpdateResourceText()
@@ -35,30 +44,29 @@ public class DataText : MonoBehaviour
                             "Speed = " + DrillData.instance.drillSpeed;
     }
 
-    public void UpdateShopText()
+    public void InitializeShopText()
     {
-        if (ShopManager.instance.DrillUpgrades.Count == 0)
+        foreach (var item in ShopManager.instance.DrillUpgrades)
         {
-            shopText.text = "## SHOP ITEMS\n" +
-                            "No items available";
-            return;
+            GameObject container = Instantiate(shopItemContainerPrefab, shopScrollView.content);
+            container.GetComponent<ShopItemContainer>().Initialize(item);
+            _shopItemContainers.Add(item, container);
         }
 
-        shopText.text = "## SHOP ITEMS\n" +
-                        "Current Item: " + ShopManager.instance.DrillUpgrades[0].itemName + "\n" +
-                        "Stone Cost = " + ShopManager.instance.DrillUpgrades[0].stoneCost + "\n" +
-                        "Coal Cost = " + ShopManager.instance.DrillUpgrades[0].coalCost + "\n" +
-                        "Iron Cost = " + ShopManager.instance.DrillUpgrades[0].ironCost + "\n" +
-                        "Copper Cost = " + ShopManager.instance.DrillUpgrades[0].copperCost + "\n";
+        foreach (var item in ShopManager.instance.Machines)
+        {
+            GameObject container = Instantiate(shopItemContainerPrefab, shopScrollView.content);
+            container.GetComponent<ShopItemContainer>().Initialize(item);
+            _shopItemContainers.Add(item, container);
+        }
     }
 
-    public static void UpdateResources()
+    public void RemoveShopItem(ShopItem item)
     {
-        OnResourceUpdate?.Invoke();
-    }
-
-    internal static void UpdateShop()
-    {
-        OnShopUpdate?.Invoke();
+        if (_shopItemContainers.TryGetValue(item, out GameObject container))
+        {
+            Destroy(container);
+            _shopItemContainers.Remove(item);
+        }
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class DrillUpgradeButton : MonoBehaviour
 {
-    private ShopItem drillUpgradeItem;
+    [SerializeField] private ShopItemContainer shopItemContainer;
+    private ShopItem upgradeItem;
     private Button _upgradeButton;
 
     private void Awake()
@@ -20,9 +21,9 @@ public class DrillUpgradeButton : MonoBehaviour
             return;
         }
 
-        drillUpgradeItem = ShopManager.instance.DrillUpgrades[0];
+        upgradeItem = shopItemContainer.shopItem;
 
-        if (ShopManager.instance.CanAfford(drillUpgradeItem))
+        if (ShopManager.instance.CanAfford(upgradeItem))
         {
             // Enable the upgrade button
             _upgradeButton.interactable = true;
@@ -36,9 +37,9 @@ public class DrillUpgradeButton : MonoBehaviour
 
     public void OnUpgradeButtonClicked()
     {
-        if (ShopManager.instance.HasItem(drillUpgradeItem))
+        if (ShopManager.instance.HasItem(upgradeItem))
         {
-            ShopManager.instance.TryPurchase(drillUpgradeItem);
+            ShopManager.instance.TryPurchase(upgradeItem);
         }
     }
 }

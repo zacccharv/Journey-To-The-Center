@@ -73,7 +73,7 @@ public class ResourceManager : MonoBehaviour
                 break;
         }
 
-        DataText.UpdateResources();
+        DataText.instance.UpdateResourceText();
     }
 
     /// <summary>
@@ -103,6 +103,6 @@ public class ResourceManager : MonoBehaviour
                 break;
         }
 
-        DataText.UpdateResources();
+        DataText.instance.UpdateResourceText();
     }
 }

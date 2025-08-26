@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: Coal Upgrade
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   itemName: Coal Upgrade
+  description: 
+  itemColor: {r: 0.38865724, g: 0.383376, b: 0.48900002, a: 1}
+  itemType: 0
+  machineType: 0
   stoneCost: 10
   coalCost: 0
   ironCost: 0

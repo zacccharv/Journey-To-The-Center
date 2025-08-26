@@ -23,7 +23,7 @@ public class ShopManager : MonoBehaviour
 
     void Start()
     {
-        DataText.UpdateShop();
+        DataText.instance.InitializeShopText();
     }
 
     public bool CanAfford(ShopItem item)
@@ -45,9 +45,14 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public bool HasItem(ShopItem drillUpgradeItem)
+    public bool HasItem(ShopItem upgradeItem)
     {
-        return DrillUpgrades.Contains(drillUpgradeItem);
+        if (upgradeItem.itemType == ItemType.Machine)
+            return Machines.Contains(upgradeItem);
+        else if (upgradeItem.itemType == ItemType.DrillUpgrade)
+            return DrillUpgrades.Contains(upgradeItem);
+        else
+            return false;
     }
 
     public void TryPurchase(ShopItem item)
@@ -60,26 +65,39 @@ public class ShopManager : MonoBehaviour
             ResourceManager.instance.ironOre -= item.ironCost;
             ResourceManager.instance.copperOre -= item.copperCost;
 
-            DrillUpgrades.Remove(item);
-
             // Add the item to the player's inventory or apply its effects
             Debug.Log("Purchased: " + item.itemName);
 
             if (item.itemType == ItemType.DrillUpgrade)
             {
+                RemoveShopItem(item);
                 DrillData.instance.UpgradeDrill();
             }
             else if (item.itemType == ItemType.Machine)
             {
+                RemoveShopItem(item);
                 DrillData.instance.PurchaseMachine(item.machineType);
             }
 
-            DataText.UpdateShop();
-            DataText.UpdateResources();
+            DataText.instance.UpdateResourceText();
         }
         else
         {
             Debug.Log("Cannot afford: " + item.itemName);
         }
+    }
+
+    public void RemoveShopItem(ShopItem item)
+    {
+        if (item.itemType == ItemType.DrillUpgrade)
+        {
+            DrillUpgrades.Remove(item);
+        }
+        else if (item.itemType == ItemType.Machine)
+        {
+            Machines.Remove(item);
+        }
+
+        DataText.instance.RemoveShopItem(item);
     }
 }

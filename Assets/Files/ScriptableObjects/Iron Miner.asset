@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Iron Miner
   description: Automatically mines iron every 1 seconds.
+  itemColor: {r: 0.568, g: 0.20675202, b: 0.28809205, a: 1}
   itemType: 1
   machineType: 3
   stoneCost: 80

@@ -5,6 +5,7 @@ public class ShopItem : ScriptableObject
 {
     public string itemName;
     [TextArea] public string description;
+    public Color itemColor;
     public ItemType itemType;
     public MachineType machineType;
     public int stoneCost;
