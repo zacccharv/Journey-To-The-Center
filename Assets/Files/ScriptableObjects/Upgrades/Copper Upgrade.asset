@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7379684ee3cc87248ad051aa78964d70, type: 3}
-  m_Name: Copper Miner
+  m_Name: Copper Upgrade
   m_EditorClassIdentifier: 
-  itemName: Copper Miner
-  description: Automatically mines copper every 1 seconds.
-  itemColor: {r: 0.568, g: 0.20675202, b: 0.28809205, a: 1}
-  itemType: 1
-  machineType: 4
-  stoneCost: 160
-  coalCost: 80
-  ironCost: 40
-  copperCost: 20
+  itemName: Copper Upgrade
+  description: Unlocks mining Copper with the drill. Increases depth drilled and
+    increases resources gathered.
+  itemColor: {r: 0.38865724, g: 0.383376, b: 0.48900002, a: 1}
+  itemType: 0
+  machineType: 0
+  stoneCost: 240
+  coalCost: 120
+  ironCost: 60
+  copperCost: 0

@@ -24,7 +24,7 @@ public class DrillInteraction : MonoBehaviour
 
     void OnMouseDown()
     {
-        DrillData.instance.DrillDown(1.0f);
+        DrillData.instance.DrillDown(.5f);
         _renderer.color = clickColor;
     }
 

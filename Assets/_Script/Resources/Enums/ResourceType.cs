@@ -4,5 +4,6 @@ public enum ResourceType
     Stone,
     Coal,
     Iron,
-    Copper
+    Copper,
+    Drill
 }

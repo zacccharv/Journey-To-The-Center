@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7379684ee3cc87248ad051aa78964d70, type: 3}
-  m_Name: Iron Upgrade
-  m_EditorClassIdentifier: 
-  itemName: Iron Upgrade
-  description: 
+  m_Name: Coal Upgrade
+  m_EditorClassIdentifier: Assembly-CSharp::ShopItem
+  itemName: Coal Upgrade
+  description: Unlocks mining Coal with the drill. Increases depth drilled and increases
+    resources gathered.
   itemColor: {r: 0.38865724, g: 0.383376, b: 0.48900002, a: 1}
   itemType: 0
   machineType: 0
-  stoneCost: 20
-  coalCost: 10
+  stoneCost: 60
+  coalCost: 0
   ironCost: 0
   copperCost: 0

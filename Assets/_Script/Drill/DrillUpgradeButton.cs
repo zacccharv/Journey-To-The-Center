@@ -15,7 +15,7 @@ public class DrillUpgradeButton : MonoBehaviour
 
     void Update()
     {
-        if (ShopManager.instance.DrillUpgrades.Count == 0)
+        if (ShopManager.instance.AvailableItems.Count == 0)
         {
             _upgradeButton.interactable = false;
             return;

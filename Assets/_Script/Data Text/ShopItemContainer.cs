@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopItemContainer : MonoBehaviour
 {
-    public TextMeshProUGUI itemText;
+    public TextMeshProUGUI itemCostText, itemDescriptionText;
     public Image itemImage;
     public ShopItem shopItem;
 
@@ -15,10 +13,13 @@ public class ShopItemContainer : MonoBehaviour
         shopItem = item;
 
         itemImage.color = shopItem.itemColor;
-        itemText.text = "Item: " + shopItem.itemName + "\n" +
-                        "Stone Cost: " + shopItem.stoneCost + "\n" +
-                        "Coal Cost: " + shopItem.coalCost + "\n" +
-                        "Iron Cost: " + shopItem.ironCost + "\n" +
-                        "Copper Cost: " + shopItem.copperCost;
+        itemCostText.text = $"Item: {shopItem.itemName}\n" +
+                            $"Stone Cost: {shopItem.stoneCost}\n" +
+                            $"Coal Cost: {shopItem.coalCost}\n" +
+                            $"Iron Cost: {shopItem.ironCost}\n" +
+                            $"Copper Cost: {shopItem.copperCost}";
+
+        itemDescriptionText.text = "Description: \n"
+                                   + "\"" + shopItem.description + "\"";
     }
 }

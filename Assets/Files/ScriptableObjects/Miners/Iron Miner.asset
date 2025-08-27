@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7379684ee3cc87248ad051aa78964d70, type: 3}
-  m_Name: Coal Upgrade
-  m_EditorClassIdentifier: Assembly-CSharp::ShopItem
-  itemName: Coal Upgrade
-  description: 
-  itemColor: {r: 0.38865724, g: 0.383376, b: 0.48900002, a: 1}
-  itemType: 0
-  machineType: 0
-  stoneCost: 10
-  coalCost: 0
-  ironCost: 0
+  m_Name: Iron Miner
+  m_EditorClassIdentifier: 
+  itemName: Iron Miner
+  description: Automatically mines iron every 4 seconds.
+  itemColor: {r: 0.4300058, g: 0.38532, b: 0.676, a: 1}
+  itemType: 1
+  machineType: 3
+  stoneCost: 80
+  coalCost: 40
+  ironCost: 20
   copperCost: 0

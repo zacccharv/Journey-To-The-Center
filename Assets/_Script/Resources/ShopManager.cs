@@ -8,6 +8,7 @@ public class ShopManager : MonoBehaviour
     public static ShopManager instance;
     public List<ShopItem> DrillUpgrades = new();
     public List<ShopItem> Machines = new();
+    public List<ShopItem> AvailableItems { get; set; } = new();
 
     private void Awake()
     {
@@ -23,6 +24,9 @@ public class ShopManager : MonoBehaviour
 
     void Start()
     {
+        AvailableItems.AddRange(DrillUpgrades);
+        AvailableItems.AddRange(Machines);
+
         DataText.instance.InitializeShopText();
     }
 
@@ -47,12 +51,7 @@ public class ShopManager : MonoBehaviour
 
     public bool HasItem(ShopItem upgradeItem)
     {
-        if (upgradeItem.itemType == ItemType.Machine)
-            return Machines.Contains(upgradeItem);
-        else if (upgradeItem.itemType == ItemType.DrillUpgrade)
-            return DrillUpgrades.Contains(upgradeItem);
-        else
-            return false;
+        return AvailableItems.Contains(upgradeItem);
     }
 
     public void TryPurchase(ShopItem item)
@@ -89,15 +88,7 @@ public class ShopManager : MonoBehaviour
 
     public void RemoveShopItem(ShopItem item)
     {
-        if (item.itemType == ItemType.DrillUpgrade)
-        {
-            DrillUpgrades.Remove(item);
-        }
-        else if (item.itemType == ItemType.Machine)
-        {
-            Machines.Remove(item);
-        }
-
+        AvailableItems.Remove(item);
         DataText.instance.RemoveShopItem(item);
     }
 }
