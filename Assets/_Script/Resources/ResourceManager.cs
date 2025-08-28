@@ -77,7 +77,7 @@ public class ResourceManager : MonoBehaviour
                 break;
         }
 
-        DataText.instance.UpdateResourceText();
+        DataText.instance.UpdateDataText();
     }
 
     /// <summary>
@@ -110,7 +110,7 @@ public class ResourceManager : MonoBehaviour
                 break;
         }
 
-        DataText.instance.UpdateResourceText();
+        DataText.instance.UpdateDataText();
     }
 
     private int ResourceDivider(float _drillLevel, float _divider)

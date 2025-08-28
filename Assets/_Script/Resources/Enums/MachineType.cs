@@ -5,5 +5,6 @@ public enum MachineType
     CoalMiner,
     IronMiner,
     CopperMiner,
-    DrillAssistant
+    DrillAssistant,
+    None
 }

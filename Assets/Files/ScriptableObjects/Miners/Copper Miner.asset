@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Copper Miner
   description: Automatically mines copper every 4 seconds.
-  itemColor: {r: 0.4300058, g: 0.38532, b: 0.676, a: 1}
+  itemColor: {r: 0.48235297, g: 0.34901962, b: 0.3529412, a: 1}
   itemType: 1
   machineType: 4
   stoneCost: 260

@@ -1,20 +1,14 @@
-using System.Collections.Generic;
-using System.Linq;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
+[RequireComponent(typeof(ResourceDataText))]
+[RequireComponent(typeof(ShopDataText))]
+[RequireComponent(typeof(EarthDataText))]
 public class DataText : MonoBehaviour
 {
     public static DataText instance;
-    public static System.Action OnResourceUpdate;
-    public static System.Action OnShopUpdate;
-    public static System.Action OnShopInit;
-    public TextMeshProUGUI resourceText, shopPurchaseCount, redTitle;
-    public ScrollRect shopScrollView;
-    public GameObject shopItemContainerPrefab;
-    public DrillInteraction drillInteraction;
-    [HideInInspector] public Dictionary<ShopItem, GameObject> _shopItemContainers = new();
+    [HideInInspector] public ResourceDataText resourceDataText;
+    [HideInInspector] public ShopDataText shopDataText;
+    [HideInInspector] public EarthDataText earthDataText;
 
     void Awake()
     {
@@ -31,59 +25,19 @@ public class DataText : MonoBehaviour
 
     void Start()
     {
-        UpdateResourceText();
+        resourceDataText = GetComponent<ResourceDataText>();
+        shopDataText = GetComponent<ShopDataText>();
+        earthDataText = GetComponent<EarthDataText>();
+
+        UpdateDataText();
     }
 
-    public void UpdateResourceText()
+    public void UpdateDataText()
     {
-        resourceText.text = "## RESOURCES\n" +
-                            $"Stone = {ResourceManager.instance.stone}\n" +
-                            $"Coal = {ResourceManager.instance.coal}\n" +
-                            $"Iron = {ResourceManager.instance.ironOre}\n" +
-                            $"Copper = {ResourceManager.instance.copperOre}\n" +
-                            $"\n" +
-                            $"## DRILL DATA\n" +
-                            $"Depth = {DrillData.instance.drillDepth}m / {DrillData.centerOfTheEarthMeters:n0}m\n" +
-                            $"Level = {DrillData.instance.drillLevel}\n" +
-                            $"Power = {DrillData.instance.drillPower}\n" +
-                            $"Speed = {DrillData.instance.drillSpeed}";
+        resourceDataText.UpdateText();
 
-        UpdatePurchasableCount();
-    }
+        shopDataText.UpdatePurchasableCount();
 
-    public void UpdatePurchasableCount()
-    {
-        // count number of purchasable items in _shopItemContainers with Linq
-        int ct = _shopItemContainers.Count((x) => ShopManager.instance.CanAfford(x.Key));
-
-        if (ct > 0)
-        {
-            shopPurchaseCount.text = ct.ToString();
-            redTitle.text = "Can Buy: ";
-        }
-        else
-        {
-            shopPurchaseCount.text = "";
-            redTitle.text = "";
-        }
-    }
-
-    public void InitializeShopText()
-    {
-        foreach (var item in ShopManager.instance.AvailableItems)
-        {
-            GameObject container = Instantiate(shopItemContainerPrefab, shopScrollView.content);
-            container.GetComponent<ShopItemContainer>().Initialize(item);
-            _shopItemContainers.Add(item, container);
-        }
-    }
-
-    public void RemoveShopItem(ShopItem item)
-    {
-        if (_shopItemContainers.TryGetValue(item, out GameObject container))
-        {
-            Destroy(container);
-            _shopItemContainers.Remove(item);
-        }
+        earthDataText.UpdateText();
     }
 }

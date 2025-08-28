@@ -18,8 +18,10 @@ public class ShopManager : MonoBehaviour
 
     public static ShopManager instance;
     public List<ShopItem> DrillUpgrades = new();
+    public List<ShopItem> DrillAttachments = new();
     public List<ShopItem> Machines = new();
     [SerializeField] private List<ShopItemInfo> Items = new();
+
     public List<ShopItem> AvailableItems { get; set; } = new();
 
     private void Awake()
@@ -37,6 +39,7 @@ public class ShopManager : MonoBehaviour
     void Start()
     {
         AvailableItems.AddRange(DrillUpgrades);
+        AvailableItems.AddRange(DrillAttachments);
         AvailableItems.AddRange(Machines);
 
         for (int i = 0; i < AvailableItems.Count; i++)
@@ -52,7 +55,7 @@ public class ShopManager : MonoBehaviour
             });
         }
 
-        DataText.instance.InitializeShopText();
+        DataText.instance.shopDataText.InitializeShopText();
     }
 
     public bool CanAfford(ShopItem item)
@@ -104,7 +107,7 @@ public class ShopManager : MonoBehaviour
                 DrillData.instance.PurchaseMachine(item.machineType);
             }
 
-            DataText.instance.UpdateResourceText();
+            DataText.instance.UpdateDataText();
         }
         else
         {
@@ -115,6 +118,6 @@ public class ShopManager : MonoBehaviour
     public void RemoveShopItem(ShopItem item)
     {
         AvailableItems.Remove(item);
-        DataText.instance.RemoveShopItem(item);
+        DataText.instance.shopDataText.RemoveShopItem(item);
     }
 }

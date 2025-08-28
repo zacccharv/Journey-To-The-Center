@@ -2,5 +2,7 @@ public enum ItemType
 {
     DrillUpgrade,
     Machine,
-    MachineUpgrade
+    MachineUpgrade,
+    DrillAttachment,
+    None
 }
