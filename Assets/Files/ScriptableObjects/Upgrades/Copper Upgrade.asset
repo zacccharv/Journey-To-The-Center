@@ -19,6 +19,6 @@ MonoBehaviour:
   itemType: 0
   machineType: 0
   stoneCost: 240
-  coalCost: 120
+  coalCost: 80
   ironCost: 60
   copperCost: 0

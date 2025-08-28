@@ -5,7 +5,7 @@ public class DrillData : MonoBehaviour
     public static DrillData instance;
     public GameObject stoneMine, coalMine, ironMine, copperMine, drillAssistant;
     public float drillDepth = 0.0f;
-    public int drillLevel = 1;
+    public float drillLevel = 1.0f;
     public float drillSpeed = 1.0f; // Time in seconds between each mining action
     public float drillPower = 0.25f; // Amount of resource mined per action
     public const float centerOfTheEarthMeters = 6371000f;

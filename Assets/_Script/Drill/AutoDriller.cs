@@ -6,7 +6,7 @@ public class AutoDriller : MonoBehaviour
 {
     public ResourceType resourceType = ResourceType.Nothing;
     public float drillInterval = 1.0f; // Time in seconds between each automatic drill action
-    private float drillTimer = 0.0f;
+    private float drillTimer = 4.0f;
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private Color drillColor;
     [SerializeField] private float drillColorDuration = 0.2f;

@@ -14,10 +14,10 @@ public class ResourceManager : MonoBehaviour
     [SerializeField] private float _stoneDivider = 1.0f;
     [SerializeField] private float _coalDivider = 1.0f;
     [SerializeField] private float _ironDivider = 1.0f;
-    [SerializeField] private float _copperDiver = 1.0f;
-    private int _amount;
+    [SerializeField] private float _copperDivider = 1.0f;
 
     // [SerializeField] private float _diamondDiver = 1.0f;
+    [HideInInspector] public float _extraAddition = 0.0f;
 
     void Awake()
     {
@@ -35,25 +35,21 @@ public class ResourceManager : MonoBehaviour
     public void AddCopperOre(int amount)
     {
         copperOre += amount;
-        Debug.Log("Copper Ore: " + copperOre);
     }
 
     public void AddIronOre(int amount)
     {
         ironOre += amount;
-        Debug.Log("Iron Ore: " + ironOre);
     }
 
     public void AddCoal(int amount)
     {
         coal += amount;
-        Debug.Log("Coal: " + coal);
     }
 
     public void AddStone(int amount)
     {
         stone += amount;
-        Debug.Log("Stone: " + stone);
     }
 
     /// <summary>
@@ -61,32 +57,28 @@ public class ResourceManager : MonoBehaviour
     /// </summary>
     public void MineForResources()
     {
-
-        int resourceType = Random.Range(0, DrillData.instance.drillLevel + 1);
-        _amount = DrillData.instance.drillLevel * 2;
+        int resourceType = Mathf.FloorToInt(Random.Range(0, DrillData.instance.drillLevel + 1));
 
         switch (resourceType)
         {
             case 0:
                 break;
             case 1:
-                AddStone(ResourceDivider(_stoneDivider));
+                AddStone(ResourceDivider(DrillData.instance.drillLevel, _stoneDivider));
                 break;
             case 2:
-                AddCoal(ResourceDivider(_coalDivider));
+                AddCoal(ResourceDivider(DrillData.instance.drillLevel, _coalDivider));
                 break;
             case 3:
-                AddIronOre(ResourceDivider(_ironDivider));
+                AddIronOre(ResourceDivider(DrillData.instance.drillLevel, _ironDivider));
                 break;
             case 4:
-                AddCopperOre(ResourceDivider(_copperDiver));
+                AddCopperOre(ResourceDivider(DrillData.instance.drillLevel, _copperDivider));
                 break;
         }
 
         DataText.instance.UpdateResourceText();
     }
-
-
 
     /// <summary>
     /// Mines for resources based on the specified resource type and amount.
@@ -102,16 +94,16 @@ public class ResourceManager : MonoBehaviour
         switch (resourceType)
         {
             case ResourceType.Stone:
-                AddStone(ResourceDivider(_stoneDivider));
+                AddStone(ResourceDivider(DrillData.instance.drillLevel + _extraAddition, _stoneDivider));
                 break;
             case ResourceType.Coal:
-                AddCoal(ResourceDivider(_coalDivider));
+                AddCoal(ResourceDivider(DrillData.instance.drillLevel + _extraAddition, _coalDivider));
                 break;
             case ResourceType.Iron:
-                AddIronOre(ResourceDivider(_ironDivider));
+                AddIronOre(ResourceDivider(DrillData.instance.drillLevel + _extraAddition, _ironDivider));
                 break;
             case ResourceType.Copper:
-                AddCopperOre(ResourceDivider(_copperDiver));
+                AddCopperOre(ResourceDivider(DrillData.instance.drillLevel + _extraAddition, _copperDivider));
                 break;
             case ResourceType.Drill:
                 MineForResources();
@@ -121,8 +113,8 @@ public class ResourceManager : MonoBehaviour
         DataText.instance.UpdateResourceText();
     }
 
-    private int ResourceDivider(float _divider)
+    private int ResourceDivider(float _drillLevel, float _divider)
     {
-        return Mathf.RoundToInt(_amount / DrillData.instance.drillLevel * _divider);
+        return Mathf.CeilToInt(_drillLevel * 2 / _divider);
     }
 }

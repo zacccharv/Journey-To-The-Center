@@ -17,7 +17,7 @@ MonoBehaviour:
   itemColor: {r: 0.4300058, g: 0.38532, b: 0.676, a: 1}
   itemType: 1
   machineType: 4
-  stoneCost: 160
-  coalCost: 80
-  ironCost: 40
+  stoneCost: 260
+  coalCost: 140
+  ironCost: 80
   copperCost: 20
