@@ -31,10 +31,10 @@ public class DestructibleTiles : MonoBehaviour
         {
             tilePosY--;
            
-            tilemap.SetTile(new Vector3Int(0,tilePosY,0), null);
+            tilemap.SetTile(new Vector3Int(36, tilePosY,0), null);
             tileCollider.size = new Vector2(tileCollider.size.x, tileCollider.size.y - sizeY);
             tileCollider.offset = new Vector2(tileCollider.offset.x, tileCollider.offset.y - offSetY);
-           
+            
         }
     }
    
