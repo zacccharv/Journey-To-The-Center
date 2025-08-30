@@ -4,5 +4,6 @@ public enum ItemType
     Machine,
     MachineUpgrade,
     DrillAttachment,
+    SingleUseItems,
     None
 }

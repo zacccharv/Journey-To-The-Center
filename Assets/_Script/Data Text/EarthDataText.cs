@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EarthDataText : MonoBehaviour
 {
-    public TextMeshProUGUI earthHealthText;
+    [SerializeField] TextMeshProUGUI earthHealthText;
     public void UpdateText()
     {
         earthHealthText.text = "<color=#FFE2B8><b>## EARTH INFO:</b></color>\n" +

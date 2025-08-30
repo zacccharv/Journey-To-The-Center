@@ -1,35 +1,36 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(OutlineShader))]
 public class DrillInteraction : MonoBehaviour
 {
-    [SerializeField] private Color hoverColor, clickColor;
-    private Color _defaultColor;
-    private SpriteRenderer _renderer;
+    public float clickSize = 1.025f;
+    public float drillAmount = 1.00f;
+    private OutlineShader outlineShader;
+
     void Awake()
     {
-        _renderer = GetComponent<SpriteRenderer>();
-        _defaultColor = _renderer.color;
+        outlineShader = GetComponent<OutlineShader>();
     }
 
     void OnMouseEnter()
     {
-        _renderer.color = hoverColor;
+        outlineShader.Hover();
     }
 
     void OnMouseExit()
     {
-        _renderer.color = _defaultColor;
+        outlineShader.Unhover();
     }
 
     void OnMouseDown()
     {
-        DrillData.instance.DrillDown(.5f);
-        _renderer.color = clickColor;
+        DrillData.instance.drill.DrillDown(drillAmount);
+        transform.localScale = Vector3.one * clickSize;
     }
 
     void OnMouseUp()
     {
-        _renderer.color = hoverColor;
+        transform.localScale = Vector3.one;
     }
 }

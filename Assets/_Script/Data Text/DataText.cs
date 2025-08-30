@@ -15,7 +15,9 @@ public class DataText : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            resourceDataText = GetComponent<ResourceDataText>();
+            shopDataText = GetComponent<ShopDataText>();
+            earthDataText = GetComponent<EarthDataText>();
         }
         else
         {
@@ -25,19 +27,13 @@ public class DataText : MonoBehaviour
 
     void Start()
     {
-        resourceDataText = GetComponent<ResourceDataText>();
-        shopDataText = GetComponent<ShopDataText>();
-        earthDataText = GetComponent<EarthDataText>();
-
         UpdateDataText();
     }
 
     public void UpdateDataText()
     {
         resourceDataText.UpdateText();
-
         shopDataText.UpdatePurchasableCount();
-
         earthDataText.UpdateText();
     }
 }

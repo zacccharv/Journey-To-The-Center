@@ -1,26 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
-    [System.Serializable]
-    public struct ShopItemInfo
-    {
-        public string itemName;
-        [TextArea]
-        public string description;
-        public int stoneCost;
-        public int coalCost;
-        public int ironCost;
-        public int copperCost;
-    }
-
     public static ShopManager instance;
     public List<ShopItem> DrillUpgrades = new();
     public List<ShopItem> DrillAttachments = new();
     public List<ShopItem> Machines = new();
-    [SerializeField] private List<ShopItemInfo> Items = new();
+    public List<ShopItem> SingleUseItems = new();
 
     public List<ShopItem> AvailableItems { get; set; } = new();
 
@@ -41,19 +28,7 @@ public class ShopManager : MonoBehaviour
         AvailableItems.AddRange(DrillUpgrades);
         AvailableItems.AddRange(DrillAttachments);
         AvailableItems.AddRange(Machines);
-
-        for (int i = 0; i < AvailableItems.Count; i++)
-        {
-            Items.Add(new ShopItemInfo
-            {
-                itemName = AvailableItems[i].itemName,
-                description = AvailableItems[i].description,
-                stoneCost = AvailableItems[i].stoneCost,
-                coalCost = AvailableItems[i].coalCost,
-                ironCost = AvailableItems[i].ironCost,
-                copperCost = AvailableItems[i].copperCost
-            });
-        }
+        AvailableItems.AddRange(SingleUseItems);
 
         DataText.instance.shopDataText.InitializeShopText();
     }
@@ -95,16 +70,25 @@ public class ShopManager : MonoBehaviour
             // Add the item to the player's inventory or apply its effects
             Debug.Log("Purchased: " + item.itemName + " at " + Time.time + " it cost " + item.stoneCost + " stone, " + item.coalCost + " coal, " + item.ironCost + " iron, " + item.copperCost + " copper.");
 
-            if (item.itemType == ItemType.DrillUpgrade)
+            switch (item.itemType)
             {
-                RemoveShopItem(item);
-                DrillData.instance.UpgradeDrill();
-                ResourceManager.instance._extraAddition++;
-            }
-            else if (item.itemType == ItemType.Machine)
-            {
-                RemoveShopItem(item);
-                DrillData.instance.PurchaseMachine(item.machineType);
+                case ItemType.DrillUpgrade:
+                    RemoveShopItem(item);
+                    DrillData.instance.drill.UpgradeDrill();
+                    ResourceManager.instance._extraAddition++;
+                    break;
+                case ItemType.Machine:
+                    RemoveShopItem(item);
+                    DrillData.instance.minerManager.PurchaseMachine(item.machineType);
+                    break;
+                case ItemType.DrillAttachment:
+                    RemoveShopItem(item);
+                    DrillData.instance.minerManager.PurchaseMachine(item.machineType);
+                    break;
+                case ItemType.SingleUseItems:
+                    RemoveShopItem(item);
+                    //.UseSingleUseItem(item);
+                    break;
             }
 
             DataText.instance.UpdateDataText();

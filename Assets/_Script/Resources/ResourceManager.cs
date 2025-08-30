@@ -24,7 +24,6 @@ public class ResourceManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -57,23 +56,23 @@ public class ResourceManager : MonoBehaviour
     /// </summary>
     public void MineForResources()
     {
-        int resourceType = Mathf.FloorToInt(Random.Range(0, DrillData.instance.drillLevel + 1));
+        int resourceType = Mathf.FloorToInt(Random.Range(0, DrillData.instance.drill.drillLevel + 1));
 
         switch (resourceType)
         {
             case 0:
                 break;
             case 1:
-                AddStone(ResourceDivider(DrillData.instance.drillLevel, _stoneDivider));
+                AddStone(ResourceDivider(DrillData.instance.drill.drillLevel, _stoneDivider));
                 break;
             case 2:
-                AddCoal(ResourceDivider(DrillData.instance.drillLevel, _coalDivider));
+                AddCoal(ResourceDivider(DrillData.instance.drill.drillLevel, _coalDivider));
                 break;
             case 3:
-                AddIronOre(ResourceDivider(DrillData.instance.drillLevel, _ironDivider));
+                AddIronOre(ResourceDivider(DrillData.instance.drill.drillLevel, _ironDivider));
                 break;
             case 4:
-                AddCopperOre(ResourceDivider(DrillData.instance.drillLevel, _copperDivider));
+                AddCopperOre(ResourceDivider(DrillData.instance.drill.drillLevel, _copperDivider));
                 break;
         }
 
@@ -94,16 +93,16 @@ public class ResourceManager : MonoBehaviour
         switch (resourceType)
         {
             case ResourceType.Stone:
-                AddStone(ResourceDivider(DrillData.instance.drillLevel + _extraAddition, _stoneDivider));
+                AddStone(ResourceDivider(DrillData.instance.drill.drillLevel + _extraAddition, _stoneDivider));
                 break;
             case ResourceType.Coal:
-                AddCoal(ResourceDivider(DrillData.instance.drillLevel + _extraAddition, _coalDivider));
+                AddCoal(ResourceDivider(DrillData.instance.drill.drillLevel + _extraAddition, _coalDivider));
                 break;
             case ResourceType.Iron:
-                AddIronOre(ResourceDivider(DrillData.instance.drillLevel + _extraAddition, _ironDivider));
+                AddIronOre(ResourceDivider(DrillData.instance.drill.drillLevel + _extraAddition, _ironDivider));
                 break;
             case ResourceType.Copper:
-                AddCopperOre(ResourceDivider(DrillData.instance.drillLevel + _extraAddition, _copperDivider));
+                AddCopperOre(ResourceDivider(DrillData.instance.drill.drillLevel + _extraAddition, _copperDivider));
                 break;
             case ResourceType.Drill:
                 MineForResources();
